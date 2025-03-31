@@ -1,0 +1,6 @@
+path: C:/Users/deylon/Desktop/numdetect/dataset
+train: train/images
+val: valid/images
+test: test/images
+names:
+  0: license-plateSW
