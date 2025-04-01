@@ -10,13 +10,12 @@ def detect_license_plate(image_path, model_path):
     for result in results:
         boxes = result.boxes.cpu().numpy()
         for box in boxes:
-            if int(box.cls[0]) == 0:
-                x1, y1, x2, y2 = box.xyxy[0]
-                plates.append((int(x1), int(y1), int(x2), int(y2)))
+            x1, y1, x2, y2 = map(int, box.xyxy[0])
+            plates.append(x1, y1, x2, y2)
     return image, plates
 
 
-image_path = './tests/bad__visibility/C515HC142.jpg'
+image_path = './tests/good__visibility/C515HC142.jpg'
 # model_path = './saved_models/yolov8n_custom/weights/epoch0.pt'
 model_path = './best.pt'
 
