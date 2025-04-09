@@ -6,7 +6,8 @@ from recognize_text import process_license_plate
 
 
 def display_image(image):
-    cv2.imshow("plate-detector", image)
+    resized_image = cv2.resize(image, None, fx=0.5, fy=0.5)
+    cv2.imshow("plate-detector", resized_image)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -19,7 +20,8 @@ def main():
         image, plates = detect_license_plate(image_path, model_path)
         display_image(image)
         for i, plate in enumerate(plates):
-            x1, y1, x2, y2 = plate
+            x1, y1, x2, y2 = plate  
+            display_image(cv2.rectangle(image.copy(), (x1, y1), (x2, y2), (0, 255, 0), 2))
             cropped_image = crop_image(image, (x1, y1, x2, y2))
             display_image(cropped_image)
             plate_text, processed = process_license_plate(cropped_image)
