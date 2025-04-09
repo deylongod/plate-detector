@@ -18,8 +18,7 @@ def main():
     print(f"Найдено изображений: {len(input_images)}")
     for image_path in input_images:
         image, plates = detect_license_plate(image_path, model_path)
-        display_image(image)
-        for i, plate in enumerate(plates):
+        for plate in plates:
             x1, y1, x2, y2 = plate  
             display_image(cv2.rectangle(image.copy(), (x1, y1), (x2, y2), (0, 255, 0), 2))
             cropped_image = crop_image(image, (x1, y1, x2, y2))
