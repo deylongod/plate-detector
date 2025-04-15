@@ -13,7 +13,7 @@ def display_image(image):
 
 
 def main():
-    model_path = "./best.pt"
+    model_path = "./last.pt"
     input_images = glob.glob("./tests/*.jpg") + glob.glob("./tests/*.jpeg") + glob.glob("./tests/*.png")
     print(f"Найдено изображений: {len(input_images)}")
     for image_path in input_images:
