@@ -44,15 +44,26 @@ def plate_validation(text):
 
 
 def scale_image(image, scale_factor):
+    if image is None:
+        return None
     height, width = image.shape[:2]
     new_width = int(width * scale_factor)
     new_height = int(height * scale_factor)
+    if new_width <= 0 or new_height <= 0:
+        return None
     return cv2.resize(image, (new_width, new_height), interpolation=cv2.INTER_CUBIC)
 
 
 def multi_scale_processing(image):
-    scales = [0.8, 0.9, 1.0, 1.1, 1.2, 1.3]
-    return [scale_image(image, scale) for scale in scales]
+    if image is None:
+        return []
+    scales = [0.8, 0.9, 1.0, 1.1, 1.2]
+    scaled_images = []
+    for scale in scales:
+        scaled = scale_image(image, scale)
+        if scaled is not None:
+            scaled_images.append(scaled)
+    return scaled_images
 
 
 def select_best_result(results):
